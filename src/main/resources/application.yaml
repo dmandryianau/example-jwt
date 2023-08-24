@@ -3,10 +3,9 @@ spring:
     name: spring-security
   jpa:
     # Provide database platform that is being used
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      # New database is created when application starts and destroyed when application is stopped
-      ddl-auto: create-drop
+      ddl-auto: none
     # Show sql when spring data jpa performs query
     show-sql: true
     properties:
@@ -15,24 +14,14 @@ spring:
         format_sql: true
     open-in-view: false
   datasource:
-    # URL connection to database (spring-security is database name)
-    url: jdbc:h2:mem:spring-security
-    # H2 sql Driver
-    driver-class-name: org.h2.Driver
+    url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
+    driver-class-name: org.postgresql.Driver
     username: ${DB_USER}
     password: ${DB_PASS}
-  h2:
-    console:
-      enabled: true
 
-logging:
-  level:
-    org:
-      hibernate:
-        orm.jdbc.bind: trace
-        type: trace
-        stat: debug
-    web: info
+server:
+  error:
+    include-stacktrace: never
 
 management:
   endpoint:

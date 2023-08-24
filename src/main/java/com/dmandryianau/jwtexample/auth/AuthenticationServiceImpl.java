@@ -22,6 +22,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   @Override
   public JwtAuthenticationResponse signup(SignUpRequest request) {
+    if (userRepository.existsByEmail(request.getEmail())) {
+      throw new UserWithSuchEmailExistsException();
+    }
     var user = User.builder()
         .firstName(request.getFirstName())
         .lastName(request.getLastName())

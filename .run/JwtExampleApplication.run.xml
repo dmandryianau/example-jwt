@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="JwtExampleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <envs>
+      <env name="DB_HOST" value="localhost" />
+      <env name="DB_NAME" value="example_jwt" />
+      <env name="DB_PASS" value="secret" />
+      <env name="DB_PORT" value="6432" />
+      <env name="DB_USER" value="postgres" />
+      <env name="JWT_SIGNING_KEY" value="413F4428472B4B6250655368566D5970337336763979244226452948404D6351" />
+    </envs>
+    <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+    <module name="jwt-example.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="com.dmandryianau.jwtexample.JwtExampleApplication" />
+    <extension name="software.aws.toolkits.jetbrains.core.execution.JavaAwsConnectionExtension">
+      <option name="credential" />
+      <option name="region" />
+      <option name="useCurrentConnection" value="false" />
+    </extension>
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>
