@@ -10,13 +10,13 @@ import java.io.IOException;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Log4j2
@@ -38,8 +38,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     final String jwt;
     final String userEmail;
 
-    if (StringUtils.isEmpty(authHeader)
-        || !StringUtils.startsWith(authHeader, BEARER_TOKEN_PREFIX)) {
+    if (!StringUtils.hasLength(authHeader)
+        || StringUtils.startsWithIgnoreCase(authHeader, BEARER_TOKEN_PREFIX)) {
 
       filterChain.doFilter(request, response);
       return;
@@ -48,7 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     try {
       userEmail = jwtService.extractUserName(jwt);
-      if (StringUtils.isNotEmpty(userEmail)
+      if (!userEmail.isBlank()
           && SecurityContextHolder.getContext().getAuthentication() == null) {
         UserDetails userDetails = userService.userDetailsService()
             .loadUserByUsername(userEmail);

@@ -1,5 +1,6 @@
 package com.dmandryianau.jwtexample.auth.user;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,5 +16,11 @@ public class UserServiceImpl implements UserService {
   public UserDetailsService userDetailsService() {
     return username -> userRepository.findByEmail(username)
         .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+  }
+
+  @Override
+  public User findById(Long userId) {
+    return userRepository.findById(userId)
+        .orElseThrow(EntityNotFoundException::new);
   }
 }
