@@ -54,6 +54,10 @@ dependencies {
     val mapstructVersion = "1.5.5.Final"
     implementation("org.mapstruct:mapstruct:${mapstructVersion}")
     annotationProcessor("org.mapstruct:mapstruct-processor:${mapstructVersion}")
+
+    val openApiVersion = "2.2.0"
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${openApiVersion}")
+
 }
 
 tasks.withType<Test> {

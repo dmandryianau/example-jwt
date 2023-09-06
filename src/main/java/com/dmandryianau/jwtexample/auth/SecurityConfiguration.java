@@ -33,8 +33,15 @@ public class SecurityConfiguration {
     http.csrf(AbstractHttpConfigurer::disable)
         .cors(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(antMatcher("/api/v1/auth/**"), antMatcher("/error")).permitAll()
-            .requestMatchers(antMatcher("/actuator/**")).permitAll()
+            .requestMatchers(
+                antMatcher("/api/v1/auth/**"),
+                antMatcher("/error"),
+                antMatcher("/actuator/**"),
+                antMatcher("/swagger-ui/**"),
+                antMatcher("/swagger-resources/**"),
+                antMatcher("/v3/api-docs/**"),
+                antMatcher("/v2/api-docs/**")
+            ).permitAll()
             .anyRequest().authenticated()
         )
         .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))

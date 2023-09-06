@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/users")
-public class UserController {
+public class UserController implements UserAPI{
 
   private final UserService userService;
   private final UserMapper userMapper;
 
   @GetMapping("/{userId}")
-  public UserDto sayHello(@PathVariable Long userId) {
+  public UserDto getUserById(@PathVariable Long userId) {
     var user = userService.findById(userId);
     return userMapper.toUserDto(user);
   }
